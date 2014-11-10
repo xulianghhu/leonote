@@ -1,0 +1,25 @@
+extends ../layout
+block content
+	div.row
+		div.panel.panel-primary
+			div.panel-heading
+				strong 类别编辑
+			div.panel-body
+				div.col-lg-3
+					form#categoryForm
+						input(type='text',name='id',value='#{category?category._id:category}').display#categoryId
+						section.panel
+							div.input-group
+								span.input-group-addon 名字
+								input(type='text' name='name',value='#{category?category.name:""}').form-control#categoryName
+						section.panel
+							div.input-group
+								span.input-group-addon 优先级
+								input(type='text' name='priority',value='#{category?category.priority:0}').form-control#categoryPriority
+						p.text-left
+							small.red#categoryError
+						section.panel
+							input(type='button',value='保存').btn.btn-primary#categorySubmit
+
+block scripts
+	script(type='text/javascript', src='/javascripts/category.js')

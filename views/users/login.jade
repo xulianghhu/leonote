@@ -1,0 +1,56 @@
+extends ../layout
+
+block content
+	div.login-bg-front#front
+		h3.login-margin 登录到
+			b LEONOTE
+		form.login-margin#loginForm
+			p.input-group
+				span.input-group-addon
+					b 邮箱
+				input(type='text', name='email',data-container="body",data-toggle="popover",data-placement="right",data-content="<span style='color:red'>请输入正确的邮箱地址</span>",data-html="true").form-control.input-lg#loginEmail
+			p.input-group
+				span.input-group-addon
+					b 密码
+				input(type='password', name='password',data-container="body",data-toggle="popover",data-placement="right",data-content="<span style='color:red'>请输入密码</span>",data-html="true").form-control.input-lg#loginPassword
+			p.text-center
+				small.red#loginError
+			p.help-block.text-center.login-margin
+				p.text-center
+					button.btn.btn-primary.btn-lg#loginSubmit &nbsp;&nbsp;登&nbsp;&nbsp;录&nbsp;&nbsp;
+		div.text-right
+			small.text-muted
+				a#register 还没有帐号? 注册一个
+
+
+	div.login-bg-front.display#back
+		h3.login-margin
+			span 注册
+			b LEONOTE
+			span 账号
+		form.login-margin#registerForm
+			p.input-group
+				span.input-group-addon
+					b 邮箱
+				input(type='text', name='email',data-container="body",data-toggle="popover",data-placement="right",data-content="<span style='color:red'>请输入正确的邮箱地址</span>",data-html="true").form-control.input-lg#registerEmail
+			p.input-group
+				span.input-group-addon
+					b 昵称
+				input(type='text', name='username',data-container="body",data-toggle="popover",data-placement="right",data-content="<span style='color:red'>请输入昵称</span>",data-html="true").form-control.input-lg#registerUsername
+			p.input-group
+				span.input-group-addon
+					b 输入密码
+				input(type='password', data-container="body",data-toggle="popover",data-placement="right",data-content="<span style='color:red'>请输入密码</span>",data-html="true").form-control.input-lg#registerPassword
+			p.input-group
+				span.input-group-addon
+					b 确认密码
+				input(type='password', name='password',data-container="body",data-toggle="popover",data-placement="right",data-content="<span style='color:red'>请再次输入密码</span>",data-html="true").form-control.input-lg#registerPasswordAgain
+			p.text-center
+				small.red#registerError
+			p.help-block.text-center.login-margin
+				p.text-center
+					button.btn.btn-primary.btn-lg#registerSubmit &nbsp;&nbsp;注&nbsp;&nbsp;册&nbsp;&nbsp;
+
+block scripts
+	script(type='text/javascript', src='/javascripts/flippant.js')
+	script(type='text/javascript', src='/javascripts/login.js')

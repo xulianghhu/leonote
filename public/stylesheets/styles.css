@@ -1,0 +1,103 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	color: #393939;
+	font-family: "Microsoft YaHei", "微软雅黑", Arial, "宋体";
+	font-size: 15px;
+	padding-top: 70px;
+	padding-bottom: 40px;
+	background-image: url('../images/background.png')
+}
+
+.red {
+	color: red;
+}
+
+.gray {
+	color: #777;
+}
+
+.display {
+	display: none;
+}
+
+.login-bg-front {
+	position: absolute;
+	width: 400px;
+	left: 50%;
+	margin-left: -200px;
+	height: auto;
+	border-radius: 5px;
+	background: #fff;
+	padding: 40px;
+}
+
+.login-bg-back {
+	position: absolute;
+	width: 400px;
+	left: 50%;
+	height: auto;
+	border-radius: 5px;
+	background: #fff;
+	padding: 40px;
+}
+
+.login-bg-front a {
+	cursor: pointer;
+}
+
+.login-margin {
+	margin: 0 0 40px 0;
+}
+
+.footer p {
+	font-size: 12px;
+	color: #777;
+}
+
+.about p,
+.description {
+	color: #777;
+	line-height: 1.5em;
+}
+
+.single-line {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.btn-margin {
+	margin-left: 10px;
+}
+
+.table td,
+.table th,
+.blog-detail h2,
+.blog-detail h4 {
+	text-align: center;
+}
+
+.blog-title a,
+.blog-title a:hover {
+	color: #428bca;
+}
+
+.blog-body {
+	float: right;
+	margin-right: 10px;
+	font-size: 13px;
+}
+
+.blog-body span,
+.blog-detail h4 {
+	color: #999;
+}
+
+.author {
+	margin: 25px 0 30px 0;
+	font-size: 16px;
+}
