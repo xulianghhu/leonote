@@ -8,20 +8,30 @@ var blogs = require('./controllers/blogs');
 
 module.exports = function (app) {
 
-	app.get('/index', users.index);
-	app.get('/login', users.login);
-	app.post('/signin', users.signin);
-	app.post('/signup', users.signup);
+	app.use(function (req, res, next) {
+		res.locals.user = req.session.user;
+		next();
+	});
 
+	app.get('/index', users.index); // 主页
+	app.get('/login', users.login); // 登录页
+	app.get('/admin', users.requireAdmin, users.admin); // 后台管理
 
-	app.get('/users/:userId', users.show);
+	app.get('/logout', users.logout); // 登出
+	app.post('/signin', users.signin); // 登录
+	app.post('/signup', users.signup); // 注册
+
+	app.get('/users', users.requireAdmin, users.list); // 用户列表
+	app.post('/users/:userId/seal', users.requireAdmin, users.seal); // 封号
+	app.post('/users/:userId/unseal', users.requireAdmin, users.unseal); // 解封
 
 	app.param('categoryId', categories.load);
-	app.get('/categories', users.auth, categories.list);
-	app.get('/categories/new', users.auth, categories.new);
-	app.get('/categories/:categoryId/edit', users.auth, categories.edit);
-	app.post('/categories', users.auth, categories.create);
-
+	app.get('/categories', users.requireAdmin, categories.list); // 类别列表
+	app.get('/categories/new', users.requireAdmin, categories.new); // 新建类别页
+	app.get('/categories/:categoryId/edit', users.requireAdmin, categories.edit); // 更新类别页
+	app.post('/categories', users.requireAdmin, categories.create); // 保存类别更改
+	app.put('/categories/:categoryId', users.requireAdmin, categories.update); // 新建类别
+	app.delete('/categories/:categoryId', users.requireAdmin, categories.delete); // 删除类别
 
 	// catch 404 and forward to error handler
 	app.use(function (req, res, next) {

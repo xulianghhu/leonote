@@ -11,7 +11,9 @@ var UserSchema = new Schema({
 	username: { type: String, default: '' },
 	hashed_password: { type: String, default: '' },
 	salt: { type: String, default: '' },
-	status: { type: Number, default: 0 }
+	role: {type: Number, default: 0},
+	status: { type: Number, default: 0 },
+	create_time: {type: Date, default: Date.now}
 });
 
 /**
@@ -55,7 +57,6 @@ UserSchema.path('username').validate(function (username, fn) {
 		fn(!err && users.length === 0);
 	});
 }, '昵称已被使用');
-
 
 /**
  * 方法

@@ -5,6 +5,7 @@
 var mongoose = require('mongoose');
 var Category = mongoose.model('Category');
 var response = require('../lib/response');
+var extend = require('util')._extend;
 
 exports.load = function (req, res, next, id) {
 	Category.findOne({_id: id}, function (err, category) {
@@ -45,9 +46,18 @@ exports.edit = function (req, res) {
 exports.create = function (req, res) {
 	var category = new Category(req.body);
 	category.save(function (err) {
-		if (err)
-			response.error(res, err);
-		else
-			response.success(res);
+		response.handle(res, err);
+	});
+};
+
+exports.update = function (req, res) {
+	Category.update({_id: req.params.categoryId}, req.body, function (err) {
+		response.handle(res, err);
+	});
+};
+
+exports.delete = function (req, res) {
+	Category.remove({_id: req.params.categoryId}, function (err) {
+		response.handle(res, err);
 	});
 };

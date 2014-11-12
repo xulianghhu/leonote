@@ -1,0 +1,31 @@
+extends ../layout
+block content
+	div.row
+		div.panel.panel-primary
+			div.panel-heading
+				strong 账号管理
+			div.panel-body
+				table.table
+					tr
+						th #
+						th 邮箱
+						th 昵称
+						th 角色
+						th 注册时间
+						th 操作
+					-for(var i=0;i<users.length;i++)
+						tr
+							td #{i}
+							td #{users[i].email}
+							td #{users[i].username}
+							td #{users[i].role === 1 ? "管理员":"普通用户"}
+							td #{users[i].create_time}
+							td
+								div.btn-group
+									if (!users[i].status==1)
+										a(_id='#{users[i]._id}').btn.btn-danger.btn-shadow.btn-sm.sealUser 封号
+									else
+										a(_id='#{users[i]._id}').btn.btn-success.btn-shadow.btn-sm.unsealUser 解封
+
+block scripts
+	script(type='text/javascript', src='/javascripts/user.js')

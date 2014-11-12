@@ -4,6 +4,19 @@
 $(function () {
 	var ajax = new Ajax();
 
+	$('.removeCategory').click(function () {
+		var that = $(this);
+		var id = that.attr('_id');
+		ajax.delete('/categories/' + id, function (result) {
+			if (result.code == 0) {
+				that.parent().parent().parent().remove();
+			} else {
+				alert(result.message);
+			}
+		});
+	});
+
+
 	$('#categorySubmit').click(function () {
 		var id = $('#categoryId').val();
 		var data = {
@@ -20,7 +33,7 @@ $(function () {
 		};
 
 		// 更新类别
-		if (!id) {
+		if (id != 'null') {
 			ajax.put('/categories/' + id, data, cb);
 		}
 		// 新建类别
@@ -28,5 +41,4 @@ $(function () {
 			ajax.post('/categories', data, cb);
 		}
 	});
-})
-;
+});

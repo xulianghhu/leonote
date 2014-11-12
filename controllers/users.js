@@ -18,23 +18,46 @@ exports.login = function (req, res) {
 	});
 };
 
+exports.admin = function (req, res) {
+	res.render('admin', {
+		title: '后台管理'
+	});
+};
+
 /**
- * 验证是否登录中间件
- * @param req
- * @param res
- * @param next
+ * 验证是否登录的中间件,
+ * 如果已登录执行下一步,否则跳到登录界面
  */
-exports.auth = function (req, res, next) {
-	if (req.session.authenticated)
+exports.requireLogin = function (req, res, next) {
+	if (req.session.user)
 		next();
 	else
-		res.redirect('/login')
+		res.redirect('/login');
+};
+
+/**
+ * 验证是否是管理员,如果不是返回403
+ */
+exports.requireAdmin = function (req, res, next) {
+	if (req.session.user && req.session.user.role === 1) {
+		next();
+	} else {
+		var err = new Error('Forbidden');
+		err.status = 403;
+		next(err);
+	}
 }
 
 /**
- * 登录
- * @param req
- * @param res
+ * 登出
+ */
+exports.logout = function (req, res) {
+	req.session.user = undefined;
+	res.redirect('/index');
+}
+
+/**
+ * 登录验证
  */
 exports.signin = function (req, res) {
 	var email = req.body.email;
@@ -46,9 +69,7 @@ exports.signin = function (req, res) {
 		} else {
 			if (user) {
 				if (user.authenticate(password)) {
-					req.session.authenticated = true;
-					req.session.email = user.email;
-					req.session.status = user.status;
+					req.session.user = user;
 					response.success(res, url);
 				} else {
 					response.error(res, new Error('密码错误'));
@@ -62,8 +83,6 @@ exports.signin = function (req, res) {
 
 /**
  * 注册
- * @param req
- * @param res
  */
 exports.signup = function (req, res) {
 	var user = new User(req.body);
@@ -73,15 +92,28 @@ exports.signup = function (req, res) {
 		else
 			response.success(res);
 	});
+};
+
+exports.list = function (req, res) {
+	User.find()
+			.sort('-create_time')
+			.exec(function (err, users) {
+				res.render('users/list', {
+					title: '账号管理',
+					users: err ? [] : users
+				});
+			});
+};
+
+exports.seal = function (req, res) {
+	User.update({_id: req.params.userId}, {status: 1}, function (err) {
+		response.handle(res, err);
+	});
 }
 
-
-exports.load = function (req, res, next, userId) {
-
-	req.user = userId;
-	next();
+exports.unseal = function (req, res) {
+	User.update({_id: req.params.userId}, {status: 0}, function (err) {
+		response.handle(res, err);
+	});
 }
 
-exports.show = function (req, res) {
-	res.render('index', {title: req.user});
-}

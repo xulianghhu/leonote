@@ -30,13 +30,15 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({secret: 'leoxu'}));
+app.use(session({secret: 'leoxu', resave: true, saveUninitialized: true}));
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 // initialize mongoose schema
 fs.readdirSync(path.join(__dirname, 'models')).forEach(function (file) {
 	if (~file.indexOf('.js')) require(path.join(__dirname, 'models', file));
 });
+
 
 // initialize routes
 require('./routes')(app);

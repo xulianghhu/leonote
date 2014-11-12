@@ -1,6 +1,7 @@
 /**
- * Created by Leo on 14-11-5.
+ * Created by Leo on 14-11-12.
  */
+
 function Ajax() {
 }
 
@@ -35,3 +36,7 @@ Ajax.prototype = {
 		this.ajax(url, "DELETE", {}, successfn);
 	}
 }
+
+$(function () {
+
+});

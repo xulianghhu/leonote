@@ -12,12 +12,13 @@ $(function () {
 	$('#register').click(function () {
 		var timeout = 400;
 		back = flippant.flip(front, back_content, 'card', 'login-bg-back', timeout);
-		$('#loginEmail').popover('hide');
-		$('#loginPassword').popover('hide');
+
 		back.close();
 		window.setTimeout(function () {
 			$('#front').hide();
 			$('#back').show();
+			$('#loginEmail').popover('hide');
+			$('#loginPassword').popover('hide');
 		}, timeout);
 	});
 
