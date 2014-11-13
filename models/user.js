@@ -4,6 +4,7 @@
 
 var mongoose = require('mongoose');
 var crypto = require('crypto');
+require('../lib/utils');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
@@ -29,6 +30,9 @@ UserSchema
 		.get(function () {
 			return this._password;
 		});
+UserSchema.virtual('createTime').get(function () {
+	return this.create_time.format("yyyy-MM-dd hh:mm:ss");
+});
 
 UserSchema.path('email').validate(function (email) {
 	return email.trim().length;

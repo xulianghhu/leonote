@@ -20,4 +20,16 @@ BlogSchema.path('title').validate(function (title) {
 	return title.trim().length;
 }, '标题不能为空');
 
+BlogSchema.virtual('createTime').get(function () {
+	return this.create_time.format("yyyy年MM月dd日");
+});
+
+BlogSchema.statics = {
+	load: function (id, cb) {
+		this.findOne({ _id: id })
+				.populate('author', 'email username')
+				.exec(cb);
+	}
+}
+
 mongoose.model('Blog', BlogSchema);

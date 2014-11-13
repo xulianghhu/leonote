@@ -12,6 +12,17 @@ body {
 	background-image: url('../images/background.png')
 }
 
+.slideUp {
+	top: -100px;
+}
+
+.headroom {
+	-webkit-transition: all 0.4s ease-out;
+	-moz-transition: all 0.4s ease-out;
+	-o-transition: all 0.4s ease-out;
+	transition: all 0.4s ease-out;
+}
+
 .red {
 	color: red;
 }
@@ -45,7 +56,7 @@ body {
 	padding: 40px;
 }
 
-a {
+a, .pointer {
 	cursor: pointer;
 }
 
@@ -97,7 +108,13 @@ a {
 	color: #999;
 }
 
-.author {
+.blog-info {
 	margin: 25px 0 30px 0;
 	font-size: 16px;
+}
+
+.blog-info .author {
+	color: #777;
+	font-weight: bold;
+	margin-right: 10px;
 }

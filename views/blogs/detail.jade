@@ -1,0 +1,25 @@
+extends ../layout
+
+block content
+	div.row.well.blog-detail
+		h2(style='text-align:center') #{blog.title}
+		h4.blog-info
+			b.author #{blog.author.username}
+			span 发表于 #{blog.createTime}
+		div.content
+		script(src='/javascripts/jquery-1.10.2.min.js')
+
+		script(src='/ueditor/ueditor.parse.js')
+		script(type='text/javascript').
+			$.ajax({
+				url: '/blogs/#{blog._id}/content',
+				type: 'GET',
+				success: function(result) {
+					$('.content').html(result);
+					uParse('.content', {
+						rootPath: '../'
+					})
+				}
+			});
+	
+	

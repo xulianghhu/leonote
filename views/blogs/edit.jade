@@ -1,0 +1,56 @@
+extends ../layout
+
+block content
+	div.row
+		div.panel.panel-primary
+			div.panel-heading
+				strong 博客编辑
+			div.panel-body
+				div
+					form(action='/blogs/#{blog?blog._id:""}', method='#{blog?"put":"post"}')
+						input(type='text',name='id',value='#{blog?blog._id:"null"}').display
+						section.panel
+							div.input-group
+								span.input-group-addon 标题
+								input(type='text', name='title', value='#{blog ? blog.title:""}').form-control
+						section.panel
+							-var currentCategory='';
+							div.input-group
+								span(type='button', data-toggle='dropdown').input-group-addon.dropdown-toggle.pointer 类别
+									span.caret
+								ul(role='menu').dropdown-menu#categoryList
+									each category in categories
+										li(_id='#{category._id}')
+											a #{category.name}
+										if(blog && blog.category && category._id.toString()==blog.category.toString())
+											-currentCategory=category.name;
+								input(type='text', name='category').display#categoryId
+								input(type='text', disabled='disabled', value='#{currentCategory}').form-control#categoryName
+
+						section.panel
+							script(type="text/plain",id="myEditor",name="content")
+							script(src='/ueditor/ueditor.config.js')
+							script(src='/ueditor/editor_api.js')
+							if (blog)
+								script(type='text/javascript').
+									ue = UE.getEditor('myEditor',{initialFrameHeight:500});
+									ue.ready(function() {
+										$.ajax({
+											url: '/blogs/#{blog ? blog._id : 0}/content',
+											type: 'GET',
+											success: function(result) {
+												ue.setContent(result);
+											}
+										});
+									});
+							else
+								script(type='text/javascript').
+									ue = UE.getEditor('myEditor',{initialFrameHeight:500});
+						p.text-left
+							small.red#blogError
+						section.panel
+							input(type='submit', value='保存').btn.btn-primary#blogSubmit
+
+block scripts
+	script(type='text/javascript', src='/javascripts/blog.js')
+							

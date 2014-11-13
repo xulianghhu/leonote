@@ -18,6 +18,15 @@ exports.load = function (req, res, next, id) {
 	});
 };
 
+exports.loadAll = function (req, res, next) {
+	Category.find()
+			.sort('-priority')
+			.exec(function (err, categories) {
+				req.categories = categories;
+				next();
+			});
+};
+
 exports.list = function (req, res) {
 	Category.find()
 			.sort('-priority')
@@ -31,7 +40,7 @@ exports.list = function (req, res) {
 
 exports.new = function (req, res) {
 	res.render('categories/edit', {
-		title: '新建类别'
+		title: '创建类别'
 	});
 };
 
