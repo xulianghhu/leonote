@@ -6,24 +6,6 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var response = require('../lib/response');
 
-exports.index = function (req, res) {
-	res.render('index', {
-		title: 'LEONOTE'
-	});
-}
-
-exports.login = function (req, res) {
-	res.render('users/login', {
-		title: '登录'
-	});
-};
-
-exports.admin = function (req, res) {
-	res.render('admin', {
-		title: '后台管理'
-	});
-};
-
 /**
  * 验证是否登录的中间件,
  * 如果已登录执行下一步,否则跳到登录界面
@@ -46,7 +28,7 @@ exports.requireAdmin = function (req, res, next) {
 		err.status = 403;
 		next(err);
 	}
-}
+};
 
 /**
  * 登出
@@ -54,7 +36,7 @@ exports.requireAdmin = function (req, res, next) {
 exports.logout = function (req, res) {
 	req.session.user = undefined;
 	res.redirect('/index');
-}
+};
 
 /**
  * 登录验证
@@ -94,6 +76,9 @@ exports.signup = function (req, res) {
 	});
 };
 
+/**
+ * 用户列表
+ */
 exports.list = function (req, res) {
 	User.find()
 			.sort('-create_time')
@@ -105,12 +90,18 @@ exports.list = function (req, res) {
 			});
 };
 
+/**
+ * 封号
+ */
 exports.seal = function (req, res) {
 	User.update({_id: req.params.userId}, {status: 1}, function (err) {
 		response.handle(res, err);
 	});
 }
 
+/**
+ * 解封
+ */
 exports.unseal = function (req, res) {
 	User.update({_id: req.params.userId}, {status: 0}, function (err) {
 		response.handle(res, err);

@@ -1,55 +1,10 @@
 doctype html
 html
-	head
-		title= title
-		meta(name='author', content="Leo Xu")
-		meta(name='viewport', content='width=device-width, initial-scale=1.0')
-		meta(http-equiv="X-UA-Compatible" content="IE=9")
-		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-		link(rel='stylesheet', href='/stylesheets/bootstrap-theme.min.css')
-		link(rel='stylesheet', href='/stylesheets/flippant.css')
-		link(rel='stylesheet', href='/stylesheets/styles.css')
-
+	include inc/header
 	body
-		nav(role='navigation').navbar.navbar-inverse.navbar-fixed-top
-			div.container
-				div.navbar-header
-					a(href='/').navbar-brand
-						b LEONOTE
-				div.navbar-collapse.collapse.container
-					ul.nav.navbar-nav#navigation
-						li#blog
-							a(href='/blogs?index=1&size=5') &nbsp;博客&nbsp;
-						li#about
-							a(href='/about') 关于我
-						li#admin
-							if (user && user.role === 1)
-								a(href='/admin') 后台管理
-
-					ul.nav.navbar-nav.pull-right
-						if (user)
-							li
-								a
-									b #{user.username}
-							li#logout
-								a(href='/logout') 注销
-						else
-							li#login
-								a(href='/login') 登录 / 注册
-						li
-							form(role='search' action='/blogs' method='get').navbar-form
-								div.form-group
-									-var s=search?search:'';
-									input(type='text' name='search' placeholder='搜索' value='#{s}').form-control
-
+		include inc/nav
 		div.container
 			block content
-
-		footer.footer
-			div.container
-				p Copyright &copy;  #{new Date().getFullYear()} by Leo Xu
-
-		script(type='text/javascript', src='/javascripts/jquery-1.10.2.min.js')
-		script(type='text/javascript', src='/javascripts/bootstrap.min.js')
-		script(type='text/javascript', src='/javascripts/app.js')
+		include inc/footer
+		include inc/scripts
 		block scripts

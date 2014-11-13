@@ -1,0 +1,33 @@
+nav(role='navigation').navbar.navbar-inverse.navbar-fixed-top
+	div.container
+		div.navbar-header
+			a(href='/index').navbar-brand
+				b LEONOTE
+			button(type='button',data-toggle='collapse',data-target='.navbar-collapse').navbar-toggle
+				span.icon-bar
+				span.icon-bar
+				span.icon-bar
+		div.navbar-collapse.collapse
+			ul.nav.navbar-nav#navigation
+				li#blog
+					a(href='/blogs?index=1&size=5') &nbsp;博客&nbsp;
+				li#about
+					a(href='/about') 关于我
+				li#admin
+					if (user && user.role === 1)
+						a(href='/admin') 后台管理
+			ul.nav.navbar-nav.pull-right
+				if (user)
+					li
+						a
+							b #{user.username}
+					li#logout
+						a(href='/logout') 注销
+				else
+					li#login
+						a(href='/login').btn 登录 / 注册
+				li
+					form(role='search' action='/blogs' method='get').navbar-form
+						div.form-group
+							-var s=search?search:'';
+							input(type='text' name='search' placeholder='搜索' value='#{s}').form-control

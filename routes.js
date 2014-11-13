@@ -2,6 +2,7 @@
  * Created by Leo on 14-11-10.
  */
 
+var main = require('./controllers/main');
 var users = require('./controllers/users');
 var categories = require('./controllers/categories');
 var blogs = require('./controllers/blogs');
@@ -13,9 +14,9 @@ module.exports = function (app) {
 		next();
 	});
 
-	app.get('/index', users.index); // 主页
-	app.get('/login', users.login); // 登录页
-	app.get('/admin', users.requireAdmin, users.admin); // 后台管理
+	app.get('/index', main.index); // 主页
+	app.get('/login', main.login); // 登录页
+	app.get('/admin', users.requireAdmin, main.admin); // 后台管理
 
 	app.get('/logout', users.logout); // 登出
 	app.post('/signin', users.signin); // 登录
@@ -32,6 +33,9 @@ module.exports = function (app) {
 	app.post('/categories', users.requireAdmin, categories.create); // 保存类别更改
 	app.put('/categories/:categoryId', users.requireAdmin, categories.update); // 新建类别
 	app.delete('/categories/:categoryId', users.requireAdmin, categories.delete); // 删除类别
+
+	app.param('blogId', blogs.load);
+	app.get('/blogs', users.requireAdmin, blogs.list); // 博客列表
 
 	// catch 404 and forward to error handler
 	app.use(function (req, res, next) {

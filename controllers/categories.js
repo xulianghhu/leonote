@@ -5,7 +5,6 @@
 var mongoose = require('mongoose');
 var Category = mongoose.model('Category');
 var response = require('../lib/response');
-var extend = require('util')._extend;
 
 exports.load = function (req, res, next, id) {
 	Category.findOne({_id: id}, function (err, category) {
