@@ -2,6 +2,7 @@ extends layout
 
 block content
 	div.row.well
-		h1= message
-		h2= error.status
-		pre #{error.stack}
+		h1= status
+		h2= message
+		if (stack)
+			pre #{stack}

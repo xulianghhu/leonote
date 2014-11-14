@@ -63,7 +63,8 @@ module.exports = function (app) {
 			res.status(err.status || 500);
 			res.render('error', {
 				message: err.message,
-				error: err
+				status: err.status,
+				stack: err.stack
 			});
 		});
 	}
@@ -74,7 +75,7 @@ module.exports = function (app) {
 		res.status(err.status || 500);
 		res.render('error', {
 			message: err.message,
-			error: {}
+			status: err.status,
 		});
 	});
 }
