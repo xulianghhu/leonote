@@ -31,13 +31,13 @@ exports.blog = function (req, res) {
 	var search = req.query.search;
 	var category = req.query.category;
 
-	ep.all('categories', 'pageBlogs', 'blogCount', 'totalCount', 'popularBlogs', function (categories, pageBlogs, blogCount, totalCount, popularBlogs) {
+	ep.all('categories', 'pageBlogs', 'count', 'totalCount', 'popularBlogs', function (categories, pageBlogs, count, totalCount, popularBlogs) {
 		res.render('blog', {
 			title: '博客',
 			totalCount: totalCount,
 			index: index,
 			size: size,
-			pageCount: Math.ceil(blogCount / size),
+			pageCount: Math.ceil(count / size),
 			blogs: pageBlogs,
 			popular: popularBlogs,
 			selectedCategory: category || '',
@@ -85,7 +85,7 @@ exports.blog = function (req, res) {
 		
 	// 查询出的博客数量
 	Blog.count(criteria, function (err, count) {
-		ep.emit('blogCount', count ? count : 0);
+		ep.emit('count', count ? count : 0);
 	});
 	
 	// 查询总数量

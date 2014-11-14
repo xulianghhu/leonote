@@ -10,8 +10,7 @@ block content
 								h4
 									a(href='/blogs/#{blog._id}') #{blog.title}
 							div.panel-body
-								div(id='#{blog._id}').content.blog-body
-									!{blog.content}
+								div(id='#{blog._id}').content.blog-body !{blog.content}
 								div.blog-tag
 									span #{blog.createTime} | 浏览(#{blog.count})
 			div.text-center
