@@ -14,6 +14,7 @@ module.exports = function (app) {
 		next();
 	});
 
+	app.get('/', main.index); // 主页
 	app.get('/index', main.index); // 主页
 	app.get('/login', main.login); // 登录页
 	app.get('/blog', main.blog); // 博客

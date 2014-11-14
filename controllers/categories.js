@@ -27,22 +27,22 @@ exports.load = function (req, res, next, id) {
  */
 exports.loadAll = function (req, res, next) {
 	Category.find()
-			.sort('-priority -create_time')
-			.exec(function (err, categories) {
-				req.categories = categories;
-				next();
-			});
+		.sort('-priority -create_time')
+		.exec(function (err, categories) {
+			req.categories = categories;
+			next();
+		});
 };
 
 exports.list = function (req, res) {
 	Category.find()
-			.sort('-priority')
-			.exec(function (err, categories) {
-				res.render('categories/list', {
-					title: '类别管理',
-					categories: err ? [] : categories
-				});
+		.sort('-priority')
+		.exec(function (err, categories) {
+			res.render('categories/list', {
+				title: '类别管理',
+				categories: err ? [] : categories
 			});
+		});
 };
 
 exports.new = function (req, res) {

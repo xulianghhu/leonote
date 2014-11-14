@@ -49,22 +49,22 @@ exports.blog = function (req, res) {
 
 	// 查询所有类别
 	Category.find()
-			.sort('-priority')
-			.exec(function (err, categories) {
-				if (err || !categories)
-					ep.emit('categories', {});
-				ep.after('blogCount', categories.length, function (countCategories) {
-					ep.emit('categories', countCategories);
-				});
-				// 查询每个类别的博客数量
-				categories.forEach(function (category) {
-					Blog.count({category: category._id}, function (err, count) {
-						var c = category.toJSON();
-						c.blogCount = err ? 0 : count;
-						ep.emit('blogCount', c);
-					});
+		.sort('-priority')
+		.exec(function (err, categories) {
+			if (err || !categories)
+				ep.emit('categories', {});
+			ep.after('blogCount', categories.length, function (countCategories) {
+				ep.emit('categories', countCategories);
+			});
+			// 查询每个类别的博客数量
+			categories.forEach(function (category) {
+				Blog.count({category: category._id}, function (err, count) {
+					var c = category.toJSON();
+					c.blogCount = err ? 0 : count;
+					ep.emit('blogCount', c);
 				});
 			});
+		});
 
 	// 分页查询博客
 	var criteria = search ? { $or: [
@@ -76,24 +76,24 @@ exports.blog = function (req, res) {
 	}
 	criteria.status = {$gt: -1};
 	Blog.find(criteria)
-			.sort("-status -create_time")
-			.skip((index - 1) * size)
-			.limit(size)
-			.exec(function (err, blogs) {
-				ep.emit('pageBlogs', err ? {} : blogs);
-			});
+		.sort("-status -create_time")
+		.skip((index - 1) * size)
+		.limit(size)
+		.exec(function (err, blogs) {
+			ep.emit('pageBlogs', err ? {} : blogs);
+		});
 
 	// 查询总数量
-	Blog.count(criteria, function (err, count) {
+	Blog.count({status: {$gt: -1}}, function (err, count) {
 		ep.emit('totalCount', count ? count : 0);
 	});
 
 	// 热门博客
 	Blog.find({status: {$gt: -1}})
-			.sort("-count -create_time")
-			.limit(5)
-			.exec(function (err, blogs) {
-				ep.emit('popularBlogs', err ? {} : blogs);
-			});
+		.sort("-count -create_time")
+		.limit(5)
+		.exec(function (err, blogs) {
+			ep.emit('popularBlogs', err ? {} : blogs);
+		});
 
 };

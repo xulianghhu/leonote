@@ -97,15 +97,20 @@ a, .pointer {
 	color: #428bca;
 }
 
-.blog-body {
+.blog-tag {
 	float: right;
 	margin-right: 10px;
 	font-size: 13px;
 }
 
-.blog-body span,
+.blog-tag span,
 .blog-detail h4 {
 	color: #999;
+}
+
+.blog-body {
+	overflow: hidden;
+	max-height: 220px;
 }
 
 .blog-info {

@@ -73,13 +73,13 @@ exports.signup = function (req, res) {
 
 exports.list = function (req, res) {
 	User.find()
-			.sort('-status -create_time')
-			.exec(function (err, users) {
-				res.render('users/list', {
-					title: '账号管理',
-					users: err ? [] : users
-				});
+		.sort('-status -create_time')
+		.exec(function (err, users) {
+			res.render('users/list', {
+				title: '账号管理',
+				users: err ? [] : users
 			});
+		});
 };
 
 exports.seal = function (req, res) {

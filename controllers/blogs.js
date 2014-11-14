@@ -20,13 +20,13 @@ exports.load = function (req, res, next, id) {
 
 exports.list = function (req, res) {
 	Blog.find()
-			.sort('-status -create_time')
-			.exec(function (err, blogs) {
-				res.render('blogs/list', {
-					title: '博客管理',
-					blogs: err ? [] : blogs
-				});
+		.sort('-status -create_time')
+		.exec(function (err, blogs) {
+			res.render('blogs/list', {
+				title: '博客管理',
+				blogs: err ? [] : blogs
 			});
+		});
 };
 
 exports.new = function (req, res) {
@@ -68,6 +68,9 @@ exports.update = function (req, res) {
 };
 
 exports.detail = function (req, res) {
+	// 预览+1
+	Blog.update({_id: req.params.blogId}, {count: req.blog.count + 1}, function (err) {
+	});
 	res.render('blogs/detail', {
 		title: req.blog.title,
 		blog: req.blog

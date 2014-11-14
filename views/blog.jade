@@ -3,18 +3,18 @@ block content
 	div.row
 		div.col-lg-9
 			each blog in blogs
-				div.blog-item
+				div
 					div.row
 						div.panel.panel-default
 							div.panel-heading
 								h4
 									a(href='/blogs/#{blog._id}') #{blog.title}
 							div.panel-body
-								div(id='#{blog._id}').content
+								div(id='#{blog._id}').content.blog-body
 									!{blog.content}
-								div.blog-body
+								div.blog-tag
 									span #{blog.createTime} | 浏览(#{blog.count})
-			div(style='text-align:center')
+			div.text-center
 				- if(pageCount>1)
 					ul.pagination
 						-var suffix = search ? ('search='+search):'';
@@ -53,7 +53,7 @@ block content
 					else
 						a(href='/blog?category=others').list-group-item 其他
 							span.badge.pull-right #{totalCount-total}
-			h5(style='color:#aaa') 热门博客
+			h5.gray 热门博客
 			div.list-group.blog-title
 				each blog in popular
 					a(href='/blog/#{blog._id}').list-group-item.single-line #{blog.title}
