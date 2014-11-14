@@ -14,6 +14,7 @@ exports.load = function (req, res, next, id) {
 			return next(err);
 		}
 		req.category = category;
+		console.log(category.blogCount)
 		next();
 	});
 };

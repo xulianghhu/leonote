@@ -20,6 +20,8 @@ BlogSchema.path('title').validate(function (title) {
 	return title.trim().length;
 }, '标题不能为空');
 
+BlogSchema.path('category').required(true, '必须选择类别');
+
 BlogSchema.virtual('createTime').get(function () {
 	return this.create_time.format("yyyy年MM月dd日");
 });

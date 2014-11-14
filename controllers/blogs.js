@@ -45,11 +45,25 @@ exports.edit = function (req, res) {
 };
 
 exports.create = function (req, res) {
-	var blog = new Blog(req.body);
+	var blog = new Blog();
+	blog.title = req.body.title;
+	blog.content = req.body.content;
+	if (req.body.category) {
+		blog.category = req.body.category;
+	}
 	blog.author = req.session.user._id;
-	console.log(blog)
 	blog.save(function (err) {
-		res.redirect('/blogs/' + blog._id);
+		if (err) {
+			response.error(res, err);
+		} else {
+			response.success(res, blog._id);
+		}
+	});
+};
+
+exports.update = function (req, res) {
+	Blog.update({_id: req.params.blogId}, req.body, function (err) {
+		response.handle(res, err);
 	});
 };
 
@@ -62,4 +76,10 @@ exports.detail = function (req, res) {
 
 exports.content = function (req, res) {
 	res.end(req.blog.content);
+};
+
+exports.delete = function (req, res) {
+	Blog.remove({_id: req.params.blogId}, function (err) {
+		response.handle(res, err);
+	});
 };

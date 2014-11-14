@@ -16,6 +16,7 @@ module.exports = function (app) {
 
 	app.get('/index', main.index); // 主页
 	app.get('/login', main.login); // 登录页
+	app.get('/blog', main.blog); // 博客
 	app.get('/admin', users.requireAdmin, main.admin); // 后台管理
 
 	app.get('/logout', users.logout); // 登出
@@ -37,10 +38,12 @@ module.exports = function (app) {
 	app.param('blogId', blogs.load);
 	app.get('/blogs', users.requireAdmin, blogs.list); // 博客列表
 	app.get('/blogs/new', users.requireAdmin, categories.loadAll, blogs.new); // 创建博客页
-	app.get('/blogs/:blogId/edit', users.requireAdmin, blogs.edit); // 更新博客页
+	app.get('/blogs/:blogId/edit', users.requireAdmin, categories.loadAll, blogs.edit); // 更新博客页
 	app.post('/blogs', users.requireAdmin, blogs.create); // 新建博客
+	app.put('/blogs/:blogId', users.requireAdmin, blogs.update); // 保存博客更改
 	app.get('/blogs/:blogId', blogs.detail); // 博客详情
 	app.get('/blogs/:blogId/content', blogs.content); // 博客内容
+	app.delete('/blogs/:blogId',blogs.delete);
 
 	// catch 404 and forward to error handler
 	app.use(function (req, res, next) {
