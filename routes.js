@@ -43,7 +43,7 @@ module.exports = function (app) {
 	app.put('/blogs/:blogId', users.requireAdmin, blogs.update); // 保存博客更改
 	app.get('/blogs/:blogId', blogs.detail); // 博客详情
 	app.get('/blogs/:blogId/content', blogs.content); // 博客内容
-	app.delete('/blogs/:blogId',blogs.delete);
+	app.delete('/blogs/:blogId', blogs.delete);
 
 	// catch 404 and forward to error handler
 	app.use(function (req, res, next) {
