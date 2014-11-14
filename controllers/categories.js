@@ -6,6 +6,9 @@ var mongoose = require('mongoose');
 var Category = mongoose.model('Category');
 var response = require('../lib/response');
 
+/**
+ * 根据请求id加载类别的中间件
+ */
 exports.load = function (req, res, next, id) {
 	Category.findOne({_id: id}, function (err, category) {
 		if (err || !category) {
@@ -19,9 +22,12 @@ exports.load = function (req, res, next, id) {
 	});
 };
 
+/**
+ * 加载全部类别的中间件
+ */
 exports.loadAll = function (req, res, next) {
 	Category.find()
-			.sort('-priority')
+			.sort('-priority -create_time')
 			.exec(function (err, categories) {
 				req.categories = categories;
 				next();

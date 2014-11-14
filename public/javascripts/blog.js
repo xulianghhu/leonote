@@ -39,15 +39,40 @@ $(function () {
 		return false;
 	});
 
-	$('.toggleBlog').click(function () {
+	var callback = function (result) {
+		if (result.code == 0) {
+			location.href = '/blogs';
+		} else {
+			alert(result.message);
+		}
+	};
+
+	/**
+	 * 删除
+	 */
+	$('.removeBlog').click(function () {
 		var that = $(this);
 		var id = that.attr('_id');
-		ajax.delete('/blogs/' + id, function (result) {
-			if (result.code == 0) {
-				that.parent().parent().parent().remove();
-			} else {
-				alert(result.message);
-			}
-		});
+		ajax.delete('/blogs/' + id, callback);
 	});
+
+	/**
+	 * 还原,取消置顶
+	 */
+	$('.reduceBlog').click(function () {
+		var that = $(this);
+		var id = that.attr('_id');
+		ajax.post('/blogs/' + id + '/reduce', {}, callback);
+	});
+
+	/**
+	 * 置顶
+	 */
+	$('.stickBlog').click(function () {
+		var that = $(this);
+		var id = that.attr('_id');
+		ajax.post('/blogs/' + id + '/stick', {}, callback);
+	});
+
+
 });

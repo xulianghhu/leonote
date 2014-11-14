@@ -25,7 +25,8 @@ module.exports = function (app) {
 
 	app.get('/users', users.requireAdmin, users.list); // 用户列表
 	app.post('/users/:userId/seal', users.requireAdmin, users.seal); // 封号
-	app.post('/users/:userId/unseal', users.requireAdmin, users.unseal); // 解封
+	app.post('/users/:userId/unseal', users.requireAdmin, users.unseal); // 解封或解除管理员权限
+	app.post('/users/:userId/grant', users.requireAdmin, users.grant); // 授权管理员
 
 	app.param('categoryId', categories.load);
 	app.get('/categories', users.requireAdmin, categories.list); // 类别列表
@@ -42,8 +43,9 @@ module.exports = function (app) {
 	app.post('/blogs', users.requireAdmin, blogs.create); // 新建博客
 	app.put('/blogs/:blogId', users.requireAdmin, blogs.update); // 保存博客更改
 	app.get('/blogs/:blogId', blogs.detail); // 博客详情
-	app.get('/blogs/:blogId/content', blogs.content); // 博客内容
-	app.delete('/blogs/:blogId', blogs.delete);
+	app.delete('/blogs/:blogId', users.requireAdmin, blogs.delete); // 删除博客
+	app.post('/blogs/:blogId/reduce', users.requireAdmin, blogs.reduce); // 还原博客,取消置顶
+	app.post('/blogs/:blogId/stick', users.requireAdmin, blogs.stick); // 置顶博客
 
 	// catch 404 and forward to error handler
 	app.use(function (req, res, next) {

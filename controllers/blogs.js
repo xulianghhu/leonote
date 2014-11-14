@@ -74,12 +74,21 @@ exports.detail = function (req, res) {
 	});
 };
 
-exports.content = function (req, res) {
-	res.end(req.blog.content);
+exports.delete = function (req, res) {
+	// 逻辑删除
+	Blog.update({_id: req.params.blogId}, {status: -1}, function (err) {
+		response.handle(res, err);
+	});
 };
 
-exports.delete = function (req, res) {
-	Blog.remove({_id: req.params.blogId}, function (err) {
+exports.reduce = function (req, res) {
+	Blog.update({_id: req.params.blogId}, {status: 0}, function (err) {
+		response.handle(res, err);
+	});
+};
+
+exports.stick = function (req, res) {
+	Blog.update({_id: req.params.blogId}, {status: 1}, function (err) {
 		response.handle(res, err);
 	});
 };

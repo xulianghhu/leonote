@@ -30,17 +30,11 @@ exports.requireAdmin = function (req, res, next) {
 	}
 };
 
-/**
- * 登出
- */
 exports.logout = function (req, res) {
 	req.session.user = undefined;
 	res.redirect('/index');
 };
 
-/**
- * 登录验证
- */
 exports.signin = function (req, res) {
 	var email = req.body.email;
 	var password = req.body.password;
@@ -51,8 +45,12 @@ exports.signin = function (req, res) {
 		} else {
 			if (user) {
 				if (user.authenticate(password)) {
-					req.session.user = user;
-					response.success(res, url);
+					if (user.status > -1) {
+						req.session.user = user;
+						response.success(res, url);
+					} else {
+						response.error(res, new Error('该帐号已被冻结'));
+					}
 				} else {
 					response.error(res, new Error('密码错误'));
 				}
@@ -63,9 +61,6 @@ exports.signin = function (req, res) {
 	});
 }
 
-/**
- * 注册
- */
 exports.signup = function (req, res) {
 	var user = new User(req.body);
 	user.save(function (err) {
@@ -76,12 +71,9 @@ exports.signup = function (req, res) {
 	});
 };
 
-/**
- * 用户列表
- */
 exports.list = function (req, res) {
 	User.find()
-			.sort('-create_time')
+			.sort('-status -create_time')
 			.exec(function (err, users) {
 				res.render('users/list', {
 					title: '账号管理',
@@ -90,21 +82,23 @@ exports.list = function (req, res) {
 			});
 };
 
-/**
- * 封号
- */
 exports.seal = function (req, res) {
-	User.update({_id: req.params.userId}, {status: 1}, function (err) {
+	User.update({_id: req.params.userId}, {status: -1}, function (err) {
 		response.handle(res, err);
 	});
-}
+};
 
 /**
- * 解封
+ * 解封或者解除管理员权限
  */
 exports.unseal = function (req, res) {
 	User.update({_id: req.params.userId}, {status: 0}, function (err) {
 		response.handle(res, err);
 	});
-}
+};
 
+exports.grant = function (req, res) {
+	User.update({_id: req.params.userId}, {status: 1}, function (err) {
+		response.handle(res, err);
+	});
+};

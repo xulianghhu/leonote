@@ -22,10 +22,15 @@ block content
 							td #{users[i].createTime}
 							td
 								div.btn-group
-									if (!users[i].status==1)
+									if (users[i].status > -1)
 										a(_id='#{users[i]._id}').btn.btn-danger.btn-shadow.btn-sm.sealUser 封号
 									else
 										a(_id='#{users[i]._id}').btn.btn-success.btn-shadow.btn-sm.unsealUser 解封
+									if (users[i].status != -1)
+										if (users[i].status == 1)
+											a(_id='#{users[i]._id}').btn.btn-success.btn-shadow.btn-sm.unsealUser 解除
+										else
+											a(_id='#{users[i]._id}').btn.btn-info.btn-shadow.btn-sm.grantUser 授权
 
 block scripts
 	script(type='text/javascript', src='/javascripts/user.js')

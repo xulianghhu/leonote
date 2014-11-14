@@ -4,25 +4,26 @@
 $(function () {
 	var ajax = new Ajax();
 
+	var cb = function (result) {
+		if (result.code === 0) {
+			location.reload();
+		} else {
+			alert('操作失败');
+		}
+	};
+
 	$('.sealUser').click(function () {
 		var id = $(this).attr('_id');
-		ajax.post('/users/' + id + '/seal', {}, function (result) {
-			if (result.code === 0) {
-				location.reload();
-			} else {
-				alert('操作失败');
-			}
-		});
+		ajax.post('/users/' + id + '/seal', {}, cb);
 	});
 
 	$('.unsealUser').click(function () {
 		var id = $(this).attr('_id');
-		ajax.post('/users/' + id + '/unseal', {}, function (result) {
-			if (result.code === 0) {
-				location.reload();
-			} else {
-				alert('操作失败');
-			}
-		});
+		ajax.post('/users/' + id + '/unseal', {}, cb);
+	});
+
+	$('.grantUser').click(function () {
+		var id = $(this).attr('_id');
+		ajax.post('/users/' + id + '/grant', {}, cb);
 	});
 });
