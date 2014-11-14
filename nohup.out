@@ -1,0 +1,41 @@
+
+> leonote@0.0.0 start /usr/leonote
+> node ./bin/www
+
+
+module.js:340
+    throw err;
+          ^
+Error: Cannot find module 'debug'
+    at Function.Module._resolveFilename (module.js:338:15)
+    at Function.Module._load (module.js:280:25)
+    at Module.require (module.js:364:17)
+    at require (module.js:380:17)
+    at Object.<anonymous> (/usr/leonote/bin/www:2:13)
+    at Module._compile (module.js:456:26)
+    at Object.Module._extensions..js (module.js:474:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Function.Module.runMain (module.js:497:10)
+
+npm ERR! leonote@0.0.0 start: `node ./bin/www`
+npm ERR! Exit status 8
+npm ERR! 
+npm ERR! Failed at the leonote@0.0.0 start script.
+npm ERR! This is most likely a problem with the leonote package,
+npm ERR! not with npm itself.
+npm ERR! Tell the author that this fails on your system:
+npm ERR!     node ./bin/www
+npm ERR! You can get their info via:
+npm ERR!     npm owner ls leonote
+npm ERR! There is likely additional logging output above.
+npm ERR! System Linux 3.2.0-67-generic-pae
+npm ERR! command "/usr/bin/node" "/usr/bin/npm" "start"
+npm ERR! cwd /usr/leonote
+npm ERR! node -v v0.10.33
+npm ERR! npm -v 1.4.28
+npm ERR! code ELIFECYCLE
+npm ERR! 
+npm ERR! Additional logging details can be found in:
+npm ERR!     /usr/leonote/npm-debug.log
+npm ERR! not ok code 0

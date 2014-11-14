@@ -56,7 +56,7 @@ block content
 			h5.gray 热门博客
 			div.list-group.blog-title
 				each blog in popular
-					a(href='/blog/#{blog._id}').list-group-item.single-line #{blog.title}
+					a(href='/blogs/#{blog._id}').list-group-item.single-line #{blog.title}
 
 block scripts
 	script(src='/ueditor/ueditor.parse.js')

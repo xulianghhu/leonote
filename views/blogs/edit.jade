@@ -35,13 +35,7 @@ block content
 								script(type='text/javascript').
 									ue = UE.getEditor('myEditor',{initialFrameHeight:500});
 									ue.ready(function() {
-										$.ajax({
-											url: '/blogs/#{blog ? blog._id : 0}/content',
-											type: 'GET',
-											success: function(result) {
-												ue.setContent(result);
-											}
-										});
+										ue.setContent('!{blog?blog.content:""}');
 									});
 							else
 								script(type='text/javascript').
