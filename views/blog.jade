@@ -9,6 +9,8 @@ block content
 							div.panel-heading
 								h4
 									a(href='/blogs/#{blog._id}') #{blog.title}
+										if (blog.status == 1)
+											span 【置顶】
 							div.panel-body
 								div(id='#{blog._id}').content.blog-body !{blog.content}
 								div.blog-tag

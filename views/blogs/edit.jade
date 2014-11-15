@@ -29,22 +29,27 @@ block content
 
 						section.panel
 							script(type="text/plain",id="myEditor",name="content")
-							script(src='/ueditor/ueditor.config.js')
-							script(src='/ueditor/editor_api.js')
-							if (blog)
-								script(type='text/javascript').
-									ue = UE.getEditor('myEditor',{initialFrameHeight:500});
-									ue.ready(function() {
-										ue.setContent('!{blog?blog.content:""}');
-									});
-							else
-								script(type='text/javascript').
-									ue = UE.getEditor('myEditor',{initialFrameHeight:500});
 						p.text-left
 							small.red#blogError
 						section.panel
 							input(type='button', value='保存').btn.btn-primary#blogSubmit
 
 block scripts
+	script(src='/ueditor/ueditor.config.js')
+	script(src='/ueditor/editor_api.js')
 	script(type='text/javascript', src='/javascripts/blog.js')
-							
+	if (blog)
+		script(type='text/javascript').
+			ue = UE.getEditor('myEditor',{initialFrameHeight:500});
+			ue.ready(function() {
+				$.ajax({
+					url: '/blogs/#{blog._id}/content',
+					type: 'GET',
+					success: function(result) {
+						ue.setContent(result);
+					}
+				});
+			});
+	else
+		script(type='text/javascript').
+			ue = UE.getEditor('myEditor',{initialFrameHeight:500});

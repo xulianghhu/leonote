@@ -38,7 +38,7 @@ exports.logout = function (req, res) {
 exports.signin = function (req, res) {
 	var email = req.body.email;
 	var password = req.body.password;
-	var url = req.body.url ? req.body.url : '/index';
+	var url = req.body.url ? req.body.url : '/';
 	var user = User.findOne({email: email}, function (err, user) {
 		if (err) {
 			response.error(res, err)
@@ -64,10 +64,12 @@ exports.signin = function (req, res) {
 exports.signup = function (req, res) {
 	var user = new User(req.body);
 	user.save(function (err) {
-		if (err)
+		if (err) {
 			response.error(res, err);
-		else
+		} else {
+			req.session.user = user;
 			response.success(res);
+		}
 	});
 };
 

@@ -67,6 +67,10 @@ exports.update = function (req, res) {
 	});
 };
 
+exports.content = function (req, res) {
+	return res.end(req.blog.content);
+};
+
 exports.detail = function (req, res) {
 	// 预览+1
 	Blog.update({_id: req.params.blogId}, {count: req.blog.count + 1}, function (err) {

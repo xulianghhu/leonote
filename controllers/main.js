@@ -19,6 +19,12 @@ exports.login = function (req, res) {
 	});
 };
 
+exports.about = function (req, res) {
+	res.render('about', {
+		title: '关于我'
+	});
+};
+
 exports.admin = function (req, res) {
 	res.render('admin', {
 		title: '后台管理'
@@ -82,12 +88,12 @@ exports.blog = function (req, res) {
 		.exec(function (err, blogs) {
 			ep.emit('pageBlogs', err ? {} : blogs);
 		});
-		
+
 	// 查询出的博客数量
 	Blog.count(criteria, function (err, count) {
 		ep.emit('count', count ? count : 0);
 	});
-	
+
 	// 查询总数量
 	Blog.count({status: {$gt: -1}}, function (err, count) {
 		ep.emit('totalCount', count ? count : 0);

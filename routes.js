@@ -18,6 +18,7 @@ module.exports = function (app) {
 	app.get('/index', main.index); // 主页
 	app.get('/login', main.login); // 登录页
 	app.get('/blog', main.blog); // 博客
+	app.get('/about', main.about); // 关于我
 	app.get('/admin', users.requireAdmin, main.admin); // 后台管理
 
 	app.get('/logout', users.logout); // 登出
@@ -44,6 +45,7 @@ module.exports = function (app) {
 	app.post('/blogs', users.requireAdmin, blogs.create); // 新建博客
 	app.put('/blogs/:blogId', users.requireAdmin, blogs.update); // 保存博客更改
 	app.get('/blogs/:blogId', blogs.detail); // 博客详情
+	app.get('/blogs/:blogId/content', blogs.content); // 博客内容
 	app.delete('/blogs/:blogId', users.requireAdmin, blogs.delete); // 删除博客
 	app.post('/blogs/:blogId/reduce', users.requireAdmin, blogs.reduce); // 还原博客,取消置顶
 	app.post('/blogs/:blogId/stick', users.requireAdmin, blogs.stick); // 置顶博客

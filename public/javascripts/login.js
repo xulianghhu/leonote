@@ -10,16 +10,21 @@ $(function () {
 	var ajax = new Ajax();
 
 	$('#register').click(function () {
-		var timeout = 400;
-		back = flippant.flip(front, back_content, 'card', 'login-bg-back', timeout);
+		if (navigator.appName.indexOf("Microsoft") == -1) {
+			var timeout = 400;
+			back = flippant.flip(front, back_content, 'card', 'login-bg-back', timeout);
 
-		back.close();
-		window.setTimeout(function () {
+			back.close();
+			window.setTimeout(function () {
+				$('#front').hide();
+				$('#back').show();
+				$('#loginEmail').popover('hide');
+				$('#loginPassword').popover('hide');
+			}, timeout);
+		} else {
 			$('#front').hide();
 			$('#back').show();
-			$('#loginEmail').popover('hide');
-			$('#loginPassword').popover('hide');
-		}, timeout);
+		}
 	});
 
 	$('#loginEmail').blur(function () {
@@ -61,9 +66,8 @@ $(function () {
 			};
 			ajax.post('/signup', data, function (result) {
 				if (result.code == 0) {
-					location.href = result.url;
+					location.href = result.url || '/';
 				} else {
-					alert(result.message)
 					$('#registerError').text(result.message);
 				}
 			});
