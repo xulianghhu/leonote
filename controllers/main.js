@@ -102,7 +102,7 @@ exports.blog = function (req, res) {
 	// 热门博客
 	Blog.find({status: {$gt: -1}})
 		.sort("-count -create_time")
-		.limit(5)
+		.limit(10)
 		.exec(function (err, blogs) {
 			ep.emit('popularBlogs', err ? {} : blogs);
 		});
