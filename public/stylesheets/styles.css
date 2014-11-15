@@ -81,8 +81,12 @@ a, .pointer {
 	text-overflow: ellipsis;
 }
 
-.btn-margin {
+.margin-left {
 	margin-left: 10px;
+}
+
+.margin-top {
+	margin-top: 10px;
 }
 
 .table td,
