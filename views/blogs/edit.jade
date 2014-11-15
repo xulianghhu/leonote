@@ -22,10 +22,8 @@ block content
 									each category in categories
 										li(_id='#{category._id}')
 											a #{category.name}
-										if(blog && blog.category && category._id.toString()==blog.category.toString())
-											-currentCategory=category.name;
-								input(type='text', name='category',value='#{blog.category}').display#categoryId
-								input(type='text', disabled='disabled', value='#{currentCategory}').form-control#categoryName
+								input(type='text', name='category',value='#{blog?blog.category._id:""}').display#categoryId
+								input(type='text', disabled='disabled', value='#{blog?blog.category.name:""}').form-control#categoryName
 
 						section.panel
 							script(type="text/plain",id="myEditor",name="content")

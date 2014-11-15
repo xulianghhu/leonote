@@ -29,8 +29,9 @@ BlogSchema.virtual('createTime').get(function () {
 BlogSchema.statics = {
 	load: function (id, cb) {
 		this.findOne({ _id: id })
-				.populate('author', 'email username')
-				.exec(cb);
+			.populate('author', 'email username')
+			.populate('category', 'name')
+			.exec(cb);
 	}
 }
 
