@@ -24,7 +24,7 @@ block content
 											a #{category.name}
 										if(blog && blog.category && category._id.toString()==blog.category.toString())
 											-currentCategory=category.name;
-								input(type='text', name='category').display#categoryId
+								input(type='text', name='category',value='#{blog.category}').display#categoryId
 								input(type='text', disabled='disabled', value='#{currentCategory}').form-control#categoryName
 
 						section.panel
