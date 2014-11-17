@@ -2,9 +2,11 @@
 <h3>使用nodejs+expressjs+mongoose+jade搭建个人网站</h3>
 <h3>一、部署项目</h3>
 <ul>
-    <li>安装nodejs和mongodb(这里略过)<br/></li>
+    <li>安装nodejs和mongodb(这里略过)
+        <blockquote> </blockquote>
+    </li>
     <li>下载项目:
-        <blockquote>git clone https://git.oschina.net/leo_xu_/leonote.git</blockquote>
+        <blockquote>git clone https://github.com/xulianghhu/leonote.git</blockquote>
     </li>
     <li>启动mongodb(请根据你的路径设置dbpath):
         <blockquote>mongodb --dbpath=E:\mongodb\data\db</blockquote>
