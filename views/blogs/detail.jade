@@ -15,6 +15,7 @@ block content
 
 		div
 			textarea(rows='8',style='width:800px').form-control.margin-top#comment
+			div.red.margin-top#commentError
 			button.btn.btn-primary.margin-top#commentSubmit 发表评论
 		if (blog.comments.length > 0)
 			div.margin-lg.gray
@@ -24,7 +25,7 @@ block content
 			-var comment = comments[i];
 			section.panel
 				h5.panel-heading.gray
-					b #{comment.user.username}
+					b #{comment.user ? comment.user.username : "匿名网友"}
 					- var time = comment.create_time
 					span.margin-left-sm.text-left 发表于 #{time.getFullYear()}-#{time.getMonth()}-#{time.getDate()} #{time.getHours()}:#{time.getMinutes()}
 				blockquote.panel-body.break-line #{comment.body}

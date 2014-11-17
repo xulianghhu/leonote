@@ -58,7 +58,7 @@ module.exports = function (app) {
 	app.post('/blogs/:blogId/reduce', users.requireAdmin, blogs.reduce); // 还原博客,取消置顶
 	app.post('/blogs/:blogId/stick', users.requireAdmin, blogs.stick); // 置顶博客
 
-	app.post('/blogs/:blogId/comments', users.requireLogin, comments.create); // 添加评论
+	app.post('/blogs/:blogId/comments', comments.create); // 添加评论
 
 
 };

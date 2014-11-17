@@ -66,7 +66,7 @@ $(function () {
 			if (result.code == 0) {
 				location.reload();
 			} else {
-
+				$('#commentError').text(result.message);
 			}
 		});
 	});

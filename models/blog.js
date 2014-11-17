@@ -33,16 +33,6 @@ BlogSchema.virtual('createTime').get(function () {
 	return this.create_time.format("yyyy年MM月dd日");
 });
 
-BlogSchema.methods = {
-	addComment: function (user, comment, cb) {
-		this.comments.push({
-			body: comment.body,
-			user: user._id
-		});
-		this.save(cb);
-	}
-};
-
 BlogSchema.statics = {
 	load: function (id, cb) {
 		this.findOne({ _id: id })
