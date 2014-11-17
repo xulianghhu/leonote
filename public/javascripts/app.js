@@ -49,7 +49,7 @@ $(function () {
 		};
 		ajax.post('/feedbacks', data, function (result) {
 			if (result.code == 0) {
-				$('#feedbackError').text('反馈提交成功');
+				$('#feedbackError').text('提交成功, 感谢您的反馈');
 				$('#feedbackSubmit').attr('disabled', 'disabled');
 			} else {
 				$('#feedbackError').text(result.message);

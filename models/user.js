@@ -11,7 +11,6 @@ var UserSchema = new Schema({
 	username: { type: String, default: '' },
 	hashed_password: { type: String, default: '' },
 	salt: { type: String, default: '' },
-	role: {type: Number, default: 0},
 	status: { type: Number, default: 0 },
 	create_time: {type: Date, default: Date.now}
 });

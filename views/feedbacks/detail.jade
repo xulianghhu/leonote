@@ -2,9 +2,9 @@ extends ../layout
 
 block content
 	div.row.well
-		div.col-lg-8
+		div.col-lg-6
 			if (feedback.user)
-				div.panel.panel-default
+				div.panel.panel-info
 					div.panel-heading
 						b 用户
 					div.panel-body
@@ -14,18 +14,18 @@ block content
 						p
 							b 昵称
 							span.margin-left-lg #{feedback.user.username}
-			div.panel.panel-default
+			div.panel.panel-info
 				div.panel-heading
 					b 邮箱
 				div.panel-body
 					p #{feedback.email}
-			div.panel.panel-default
+			div.panel.panel-info
 				div.panel-heading
 					b Q Q
 				div.panel-body
 					p #{feedback.qq}
-			div.panel.panel-default
+			div.panel.panel-info
 				div.panel-heading
 					b 反馈信息
 				div.panel-body
-					p #{feedback.feedback}
+					p.break-line #{feedback.feedback}

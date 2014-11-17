@@ -24,7 +24,7 @@ exports.requireLogin = function (req, res, next) {
  * 验证是否是管理员,如果不是返回403
  */
 exports.requireAdmin = function (req, res, next) {
-	if (req.session.user && req.session.user.role === 1) {
+	if (req.session.user && req.session.user.status === 1) {
 		next();
 	} else {
 		var err = new Error('Forbidden');
