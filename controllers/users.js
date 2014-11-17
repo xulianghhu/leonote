@@ -11,10 +11,13 @@ var response = require('../lib/response');
  * 如果已登录执行下一步,否则跳到登录界面
  */
 exports.requireLogin = function (req, res, next) {
-	if (req.session.user)
+	if (req.session.user) {
 		next();
-	else
-		res.redirect('/login');
+	} else {
+		var err = new Error('Require Login');
+		err.status = 403;
+		next(err);
+	}
 };
 
 /**
@@ -75,13 +78,13 @@ exports.signup = function (req, res) {
 
 exports.list = function (req, res) {
 	User.find()
-		.sort('-status -create_time')
-		.exec(function (err, users) {
-			res.render('users/list', {
-				title: '账号管理',
-				users: err ? [] : users
+			.sort('-status -create_time')
+			.exec(function (err, users) {
+				res.render('users/list', {
+					title: '账号管理',
+					users: err ? [] : users
+				});
 			});
-		});
 };
 
 exports.seal = function (req, res) {

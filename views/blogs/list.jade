@@ -29,7 +29,7 @@ block content
 									a(href='/blogs/#{blog._id}/edit').btn.btn-primary.btn-shadow.btn-sm 编辑
 									if (blog.status > -1)
 										if (blog.status == 1)
-											a(_id='#{blog._id}').btn.btn-success.btn-shadow.btn-sm.reduceBlog 取置
+											a(_id='#{blog._id}').btn.btn-warning.btn-shadow.btn-sm.reduceBlog 取置
 										else
 											a(_id='#{blog._id}').btn.btn-info.btn-shadow.btn-sm.stickBlog 置顶
 

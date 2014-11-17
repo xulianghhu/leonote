@@ -4,7 +4,6 @@
 
 var mongoose = require('mongoose');
 var crypto = require('crypto');
-require('../lib/utils');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({

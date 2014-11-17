@@ -1,0 +1,25 @@
+extends ../layout
+block content
+	div.row
+		div.panel.panel-primary
+			div.panel-heading
+				strong 反馈管理
+			div.panel-body
+				table.table
+					tr
+						th #
+						th 用户
+						th 邮箱
+						th Q Q
+						th 反馈
+						th 操作
+					-for(var i=0;i<feedbacks.length;i++)
+						tr
+							td #{i}
+							td #{feedbacks[i].user?feedbacks[i].user.username:""}
+							td #{feedbacks[i].email}
+							td #{feedbacks[i].qq}
+							td.single-line.td-max-width #{feedbacks[i].feedback}
+							td
+								div.btn-group
+									a(href='/feedbacks/#{feedbacks[i]._id}').btn.btn-primary.btn-sm.btn-shadow 详细

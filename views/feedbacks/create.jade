@@ -1,0 +1,24 @@
+extends ../layout
+block content
+	div.row
+		div.panel.panel-primary
+			div.panel-heading
+				strong 意见反馈
+			div.panel-body
+				div.col-lg-5
+					section.panel
+						div.input-group
+							span.input-group-addon 邮箱
+							input(type='text', name='email').form-control#feedbackEmail
+					section.panel
+						div.input-group
+							span.input-group-addon Q  Q
+							input(type='text', name='qq').form-control#feedbackQQ
+					section.panel
+						div.input-group
+							span.input-group-addon 反馈
+							textarea( rows='5', name='feedback').form-control#feedback
+					p.text-left
+						small.red#feedbackError
+					section.panel
+						input(type='button',value='提交').btn.btn-primary#feedbackSubmit

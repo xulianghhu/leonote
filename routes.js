@@ -3,9 +3,11 @@
  */
 
 var main = require('./controllers/main');
+var feedbacks = require('./controllers/feedbacks');
 var users = require('./controllers/users');
 var categories = require('./controllers/categories');
 var blogs = require('./controllers/blogs');
+var comments = require('./controllers/comments');
 
 module.exports = function (app) {
 
@@ -19,11 +21,17 @@ module.exports = function (app) {
 	app.get('/login', main.login); // 登录页
 	app.get('/blog', main.blog); // 博客
 	app.get('/about', main.about); // 关于我
+	app.get('/feedback', main.feedback); // 反馈
 	app.get('/admin', users.requireAdmin, main.admin); // 后台管理
 
 	app.get('/logout', users.logout); // 登出
 	app.post('/signin', users.signin); // 登录
 	app.post('/signup', users.signup); // 注册
+
+	app.param('feedbackId', feedbacks.load);
+	app.get('/feedbacks', users.requireAdmin, feedbacks.list); // 反馈信息列表
+	app.get('/feedbacks/:feedbackId', users.requireAdmin, feedbacks.detail); // 反馈信息详细
+	app.post('/feedbacks', feedbacks.create); // 用户提交反馈
 
 	app.get('/users', users.requireAdmin, users.list); // 用户列表
 	app.post('/users/:userId/seal', users.requireAdmin, users.seal); // 封号
@@ -49,6 +57,8 @@ module.exports = function (app) {
 	app.delete('/blogs/:blogId', users.requireAdmin, blogs.delete); // 删除博客
 	app.post('/blogs/:blogId/reduce', users.requireAdmin, blogs.reduce); // 还原博客,取消置顶
 	app.post('/blogs/:blogId/stick', users.requireAdmin, blogs.stick); // 置顶博客
+
+	app.post('/blogs/:blogId/comments', users.requireLogin, comments.create); // 添加评论
 
 
 };

@@ -2,7 +2,6 @@
  * Created by Leo on 14-11-5.
  */
 $(function () {
-	$('.footer').hide();
 	var front = document.getElementById('front')
 			, back_content = document.getElementById('back').innerHTML
 			, back;

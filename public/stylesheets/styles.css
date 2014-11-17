@@ -35,6 +35,11 @@ body {
 	display: none;
 }
 
+.break-line {
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
 .login-bg-front {
 	position: absolute;
 	width: 400px;
@@ -85,15 +90,35 @@ a, .pointer {
 	margin-left: 10px;
 }
 
+.margin-left-sm {
+	margin-left: 5px;
+}
+
+.margin-left-lg {
+	margin-left: 20px;
+}
+
 .margin-top {
 	margin-top: 10px;
 }
 
-.table td,
-.table th,
+.margin-lg {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
 .blog-detail h2,
 .blog-detail h4 {
 	text-align: center;
+}
+
+.table th,
+.table td {
+	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	max-width: 200px;
 }
 
 .blog-title a,
@@ -102,7 +127,6 @@ a, .pointer {
 }
 
 .blog-tag {
-	float: right;
 	margin-right: 10px;
 	font-size: 13px;
 }

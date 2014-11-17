@@ -72,7 +72,7 @@ exports.content = function (req, res) {
 };
 
 exports.detail = function (req, res) {
-	// 预览+1
+	// 浏览数+1
 	Blog.update({_id: req.params.blogId}, {count: req.blog.count + 1}, function (err) {
 	});
 	res.render('blogs/detail', {

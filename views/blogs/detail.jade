@@ -2,15 +2,34 @@ extends ../layout
 
 block content
 	div.row.well.blog-detail
-		h2(style='text-align:center') #{blog.title}
+		input(type='text', value='#{blog._id}').display#blogId
+		h2.text-center #{blog.title}
 		h4.blog-info
 			b.author #{blog.author ? blog.author.username : ''}
 			span 发表于 #{blog.createTime}
-		div.content
-			!{blog.content}
+		div.content !{blog.content}
+		div.text-right.blog-tag.margin-lg
+			span 浏览(#{blog.count})
+			span.margin-left-sm |
+			span.margin-left-sm 评论(#{blog.comments.length})
 
+		div
+			textarea(rows='8',style='width:800px').form-control.margin-top#comment
+			button.btn.btn-primary.margin-top#commentSubmit 发表评论
+		if (blog.comments.length > 0)
+			div.margin-lg.gray
+				b 最新评论
+		-var comments = blog.comments;
+		-for(var i=comments.length-1; i>=0; i--)
+			-var comment = comments[i];
+			section.panel
+				h5.panel-heading.gray
+					b #{comment.user.username}
+					- var time = comment.create_time
+					span.margin-left-sm.text-left 发表于 #{time.getFullYear()}-#{time.getMonth()}-#{time.getDate()} #{time.getHours()}:#{time.getMinutes()}
+				blockquote.panel-body.break-line #{comment.body}
 block scripts
-	script(src='/ueditor/ueditor.parse.js')
+	script(type='text/javascript',src='/ueditor/ueditor.parse.js')
 	script.
 		uParse('.content', {
 			rootPath: '../'

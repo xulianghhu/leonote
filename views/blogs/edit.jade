@@ -6,31 +6,29 @@ block content
 			div.panel-heading
 				strong 博客编辑
 			div.panel-body
-				div
-					form
-						input(type='text',name='id',value='#{blog?blog._id:"null"}').display#blogId
-						section.panel
-							div.input-group
-								span.input-group-addon 标题
-								input(type='text', name='title', value='#{blog ? blog.title:""}').form-control#blogTitle
-						section.panel
-							-var currentCategory='';
-							div.input-group
-								span(type='button', data-toggle='dropdown').input-group-addon.dropdown-toggle.pointer 类别
-									span.caret
-								ul(role='menu').dropdown-menu#categoryList
-									each category in categories
-										li(_id='#{category._id}')
-											a #{category.name}
-								input(type='text', name='category',value='#{blog?blog.category._id:""}').display#categoryId
-								input(type='text', disabled='disabled', value='#{blog?blog.category.name:""}').form-control#categoryName
+				input(type='text',name='id',value='#{blog?blog._id:"null"}').display#blogId
+				section.panel
+					div.input-group
+						span.input-group-addon 标题
+						input(type='text', name='title', value='#{blog ? blog.title:""}').form-control#blogTitle
+				section.panel
+					-var currentCategory='';
+					div.input-group
+						span(type='button', data-toggle='dropdown').input-group-addon.dropdown-toggle.pointer 类别
+							span.caret
+						ul(role='menu').dropdown-menu#categoryList
+							each category in categories
+								li(_id='#{category._id}')
+									a #{category.name}
+						input(type='text', name='category',value='#{blog?blog.category._id:""}').display#categoryId
+						input(type='text', disabled='disabled', value='#{blog?blog.category.name:""}').form-control#categoryName
 
-						section.panel
-							script(type="text/plain",id="myEditor",name="content")
-						p.text-left
-							small.red#blogError
-						section.panel
-							input(type='button', value='保存').btn.btn-primary#blogSubmit
+				section.panel
+					script(type="text/plain",id="myEditor",name="content")
+				p.text-left
+					small.red#blogError
+				section.panel
+					input(type='button', value='保存').btn.btn-primary#blogSubmit
 
 block scripts
 	script(src='/ueditor/ueditor.config.js')

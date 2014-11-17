@@ -13,7 +13,14 @@ var BlogSchema = new Schema({
 	update_time: {type: Date, default: Date.now},
 	category: {type: Schema.ObjectId, ref: 'Category'},
 	count: {type: Number, default: 0},
-	status: {type: Number, default: 0}
+	status: {type: Number, default: 0},
+	comments: [
+		{
+			body: { type: String, default: '' },
+			user: { type: Schema.ObjectId, ref: 'User' },
+			create_time: { type: Date, default: Date.now }
+		}
+	]
 });
 
 BlogSchema.path('title').validate(function (title) {
@@ -26,13 +33,24 @@ BlogSchema.virtual('createTime').get(function () {
 	return this.create_time.format("yyyy年MM月dd日");
 });
 
+BlogSchema.methods = {
+	addComment: function (user, comment, cb) {
+		this.comments.push({
+			body: comment.body,
+			user: user._id
+		});
+		this.save(cb);
+	}
+};
+
 BlogSchema.statics = {
 	load: function (id, cb) {
 		this.findOne({ _id: id })
-			.populate('author', 'email username')
-			.populate('category', 'name')
-			.exec(cb);
+				.populate('author', 'email username')
+				.populate('category', 'name')
+				.populate('comments.user')
+				.exec(cb);
 	}
-}
+};
 
 mongoose.model('Blog', BlogSchema);
