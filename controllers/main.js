@@ -37,7 +37,7 @@ exports.admin = function (req, res) {
 	});
 };
 
-exports.blog = function (req, res) {
+exports. blog = function (req, res) {
 	var index = req.query.index || 1;
 	var size = req.query.size || 5;
 	var search = req.query.search;
