@@ -9,7 +9,7 @@
         <blockquote>git clone https://github.com/xulianghhu/leonote.git</blockquote>
     </li>
     <li>启动mongodb(请根据你的路径设置dbpath):
-        <blockquote>mongodb --dbpath=E:\mongodb\data\db</blockquote>
+        <blockquote>mongod --dbpath=E:\mongodb\data\db</blockquote>
     </li>
     <li>进入主目录,运行
         <blockquote>npm install</blockquote>
