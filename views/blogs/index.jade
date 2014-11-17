@@ -14,7 +14,7 @@ block content
 							div.panel-body
 								div(id='#{blog._id}').content.blog-body !{blog.content}
 								div.text-right.blog-tag.margin-top
-									span #{blog.createTime} | 浏览(#{blog.count})
+									span #{blog.createTime} | 浏览(#{blog.count}) | 评论(#{blog.comments.length})
 			div.text-center
 				- if(pageCount>1)
 					ul.pagination
