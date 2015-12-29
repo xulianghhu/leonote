@@ -1,30 +1,29 @@
 <h1>LEONOTE</h1>
-<h3>使用nodejs+expressjs+mongoose+jade搭建个人网站</h3>
-<h3>一、部署项目</h3>
+<h3>build website by expressjs, jade and mongoose </h3>
+<h3>1. Install and deploy</h3>
 <ul>
-    <li>安装nodejs和mongodb(这里略过)
+    <li>install nodejs and mongodb
         <blockquote> </blockquote>
     </li>
-    <li>下载项目:
-        <blockquote>git clone https://github.com/xulianghhu/leonote.git</blockquote>
+    <li>download source code:
+        <p><code>git clone https://github.com/xulianghhu/leonote.git</code></p>
     </li>
-    <li>启动mongodb(请根据你的路径设置dbpath):
-        <blockquote>mongod --dbpath=E:\mongodb\data\db</blockquote>
+    <li>startup mongodb (dbpath is the data store path):
+        <p><code>mongod --dbpath=D:\mongodb\data\db</code></p>
     </li>
-    <li>进入主目录,运行
-        <blockquote>npm install</blockquote>
+    <li>install npm modules:
+        <p><code>npm install</code></p>
     </li>
-    <li>运行项目
-        <blockquote>npm start</blockquote>
+    <li>start server:
+        <p><code>npm start</code></p>
     </li>
 </ul>
-<h3>二、项目基本功能</h3>
+<h3>2. Basic functionalities</h3>
 <ul>
-    <li>注册登录</li>
-    <li>用户管理</li>
-    <li>类别管理</li>
-    <li>博客管理</li>
-    <li>博客评论</li>
-    <li>用户反馈</li>
-    <li>权限管理</li>
+    <li>Singup and Loginin </li>
+    <li>User Management</li>
+    <li>Category Management</li>
+    <li>Blog Management</li>
+    <li>Blog Comments</li>
+    <li>Authentication and Authorization</li>
 </ul>

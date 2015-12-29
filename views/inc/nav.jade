@@ -16,7 +16,7 @@ nav(role='navigation').navbar.navbar-inverse.navbar-fixed-top.headroom
 				li#contact
 					a(href='/feedback') 反馈
 				li#admin
-					if (user && user.role === 1)
+					if (user && user.status === 1)
 						a(href='/admin') 后台管理
 			ul.nav.navbar-nav.pull-right
 				if (user)
